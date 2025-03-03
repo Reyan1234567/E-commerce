@@ -5,7 +5,7 @@ import refresh from "../models/refresh.js"
 const router=Router()
 config()
 
-router.get("/token",async(req,res)=>{
+router.post("/token",async(req,res)=>{
     const authHeader=req.headers['Authorization']
     const refreshToken=authHeader?.split(" ")[1]
     if(!refreshToken){
