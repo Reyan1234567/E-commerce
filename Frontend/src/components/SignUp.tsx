@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
@@ -16,7 +17,7 @@ const SignUp = () => {
       <input type="password" className="input w-full" placeholder="Password" />
 
       <button className="btn btn-neutral mt-4">Sign up</button>
-      <p className="mt-2">Already have an account? <a className="underline" href="./login.tsx">Sign-in</a></p>
+      <p className="mt-2">Already have an account? <Link className="underline" to="/login">Sign-in</Link></p>
     </div>
   );
 };

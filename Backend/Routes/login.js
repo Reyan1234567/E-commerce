@@ -16,30 +16,29 @@ router.post("/login", async (req, res) => {
 
   const userFind = await accounts.findOne({ username: body.username });
   if (!userFind) {
-    return res.status(404).send("Unauthorized");
+    return res.status(401).send("Unauthorized");
   }
 
   try {
     const compared = await bcrypt.compare(body.password, userFind.password);
     if (!compared) {
-      return res.status(404).send("Unauthorized");
+      return res.status(401).send("Unauthorized");
     }
 
     const accessT = jwt.sign(
-      { id: userFind._id, role: "user" },
+      { id: userFind._id, role: userFind.role },
       process.env.A_SECRET_VAL,
       {
         expiresIn: "15m",
       }
     );
     const refreshT = jwt.sign(
-      { id: userFind._id, role: "user" },
+      { id: userFind._id, role: userFind.role },
       process.env.R_SECRET_VAL,
       {
         expiresIn: "1d",
       }
     );
-
 
     const refreshe = new refresh({
       refreshToken: refreshT,
@@ -49,7 +48,7 @@ router.post("/login", async (req, res) => {
 
     await refreshe.save();
 
-    res.status(201).send({accessToken:accessT,refreshToken:refreshT});
+    res.status(201).send({ accessToken: accessT, refreshToken: refreshT });
   } catch (err) {
     res.status(500).send(err.message);
     console.log(err);
