@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer, Bounce } from "react-toastify";
@@ -22,7 +22,7 @@ const Login = () => {
 
   const onsubmit = async (d: inputData) => {
     try {
-      const response = await axios.post("http://localhost:3300/login", d, {
+      const response = await api.post("http://localhost:3300/login", d, {
         withCredentials: true,
       });
       
