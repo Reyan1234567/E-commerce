@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UseAuthStore } from "../Global/store";
+// import { useAuthStore } from "../Global/store";
 
 type inputData = {
   username: string;
@@ -11,8 +11,8 @@ type inputData = {
 };
 
 const Login = () => {
-  const setAccesstoken = UseAuthStore((state) => state.setAccesstoken);
-  const setRefreshtoken = UseAuthStore((state) => state.setRefreshtoken);
+  // const setAccesstoken = useAuthStore((state) => state.setAccesstoken);
+  // const setRefreshtoken = useAuthStore((state) => state.setRefreshtoken);
   const navigate = useNavigate();
   const {
     register,
@@ -27,8 +27,8 @@ const Login = () => {
       });
       
       if (response.status === 201) {
-        setAccesstoken(response.data.accessToken);
-        setRefreshtoken(response.data.refreshToken);
+        localStorage.setItem("accessToken", response.data.accessToken)
+        localStorage.setItem("refreshToken", response.data.refreshToken)
         navigate("/home");
       } else {
         errorNotification();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UseAuthStore } from "../Global/store";
+// import { useAuthStore } from "../Global/store";
 
 const api = axios.create({
   baseURL: "http://localhost:3300",
@@ -16,7 +16,7 @@ let failedQueue:FQ[]=[]
 
 api.interceptors.request.use(
   (config) => {
-    const token = UseAuthStore((state) => state.accessToken);
+    const token = localStorage.getItem("accessToken")
     if (token) {
       config.headers.Authorization = "access token";
     }
@@ -63,22 +63,20 @@ api.interceptors.response.use(
             isRefreshing=false
         }
 
-
     }
     return Promise.reject(error);
   }
 );
-function refreshToken() {
+const refreshToken=async()=>{
     try{
-        const refreshToken=UseAuthStore((state)=>state.refreshToken)
-        const response=await axios.post("/refresh",{refreshToken})
+        const refreshToken=localStorage.getItem("refreshToken")
+        const response=await axios.post("/token",{refreshToken})
         const {accessToken}=response.data
-        UseAuthStore((state)=>state.setAccesstoken(accessToken))
+        localStorage.setItem("accessToken", accessToken)
         return accessToken
     }
     catch(err){
-        UseAuthStore((state)=>state.setAccesstoken(''))
-        UseAuthStore((state)=>state.setRefreshtoken(''))
+        localStorage.clear()
         window.location.href = "/login";
         throw err
 

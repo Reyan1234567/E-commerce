@@ -6,8 +6,8 @@ const router=Router()
 config()
 
 router.post("/token",async(req,res)=>{
-    const authHeader=req.headers['Authorization']
-    const refreshToken=authHeader?.split(" ")[1]
+    const {body}=req
+    const refreshToken=body.refreshToken
     if(!refreshToken){
         return res.status(401).send("Unauthorized")
     }

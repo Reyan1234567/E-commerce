@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { checkAuth } from "../middleware/adminCheck.js";
+import { adminCheck } from "../middleware/adminCheck.js";
 const router=Router()
 
-router.get("/items",checkAuth,(req,res)=>{
+router.get("/items",adminCheck,(req,res)=>{
     res.send("the items")
     console.log("items right here")
 })

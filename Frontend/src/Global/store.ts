@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-export const UseAuthStore=create((set)=>({
+export const useAuthStore=create((set)=>({
     accessToken:null,
     refreshToken:null,
     setAccesstoken:(accessToken:string)=>{

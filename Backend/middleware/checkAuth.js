@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import refresh from "../models/refresh";
+
 export const checkAuth = async (req,res,next) => {
   const authHeader = req.headers["Authorization"];
   const accessToken = authHeader.split(" ")[1];
