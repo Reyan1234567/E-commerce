@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "../Auth/axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer, Bounce } from "react-toastify";

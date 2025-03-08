@@ -1,9 +1,9 @@
 import { Router } from "express";
-import accounts from "../models/accounts.js";
+import accounts from "../../models/accounts.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import refresh from "../models/refresh.js";
+import refresh from "../../models/refresh.js";
 
 const router = Router();
 dotenv.config();
@@ -55,9 +55,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-router.post("/refresh",(req,res)=>{
-  
-})
+router.post("/refresh", (req, res) => {});
 
 export default router;

@@ -1,5 +1,5 @@
 import React from 'react'
-import {check} from './checkAuth.ts'
+import {check} from '../Auth/checkAuth.ts'
 import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
 const navigate=useNavigate()
