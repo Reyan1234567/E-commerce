@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div>
       {/* <SignUp /> */}
-      <Login/>
+      <div className="w-full p-4"><Login/></div>
     </div>
   );
 };
